@@ -56,5 +56,5 @@ FROM (SELECT num, company, stopb.name stopb
   JOIN
   (SELECT num, company, stopa.name stopa
   FROM route a JOIN route b ON (a.company = b.company AND a.num = b.num) JOIN stops stopa ON stopa.id = a.stop JOIN stops stopb ON stopb.id = b.stop
-  WHERE stopb.name = 'Lochend') t2 
-WHERE t1.stopb = t2.stopa;
+  WHERE stopb.name = 'Lochend') t2
+  ON t1.stopb = t2.stopa;
