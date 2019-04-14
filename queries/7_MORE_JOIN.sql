@@ -1,7 +1,7 @@
 -- 1. List the films where the yr is 1962 [Show id, title]
 SELECT id, title
 FROM movie
-WHERE yr=1962;
+WHERE yr = 1962;
 
 -- 2. Give year of 'Citizen Kane'.
 SELECT yr
@@ -22,7 +22,7 @@ WHERE name = 'Glenn Close';
 -- 5. What is the id of the film 'Casablanca'
 SELECT id
 FROM movie
-WHERE title= 'Casablanca';
+WHERE title = 'Casablanca';
 
 -- 6. Obtain the cast list for 'Casablanca'.
 SELECT name
@@ -52,17 +52,17 @@ WHERE yr = 1962 AND ord = 1;
 -- 11. Which were the busiest years for 'John Travolta', show the year and the number of movies he made each year for any year in which he made more than 2 movies.
 SELECT yr, COUNT(title)
 FROM
-  movie JOIN casting ON movie.id=movieid
-  JOIN actor ON actorid=actor.id
-where name='John Travolta'
+  movie JOIN casting ON movie.id = movieid
+  JOIN actor ON actorid = actor.id
+where name = 'John Travolta'
 GROUP BY yr
-HAVING COUNT(title)=(SELECT MAX(c)
+HAVING COUNT(title) = (SELECT MAX(c)
 FROM
   (SELECT yr, COUNT(title) AS c
   FROM
-    movie JOIN casting ON movie.id=movieid
-    JOIN actor ON actorid=actor.id
-  where name='John Travolta'
+    movie JOIN casting ON movie.id = movieid
+    JOIN actor ON actorid = actor.id
+  where name = 'John Travolta'
   GROUP BY yr) AS t
 );
 
@@ -80,15 +80,14 @@ FROM movie JOIN casting ON movie.id = movieid
   JOIN actor ON actor.id = actorid
 WHERE ord = 1
 GROUP BY name
-HAVING COUNT
-(*)>= 30
+HAVING COUNT(*) >= 30
 ORDER BY name;
 
 -- 14. List the films released in the year 1978 ordered by the number of actors in the cast, then by title.
 SELECT title, casted
 FROM movie JOIN (SELECT movieid, COUNT(actorid) casted
   FROM casting
-  GROUP BY movieid) t ON movie.id=t.movieid
+  GROUP BY movieid) t ON movie.id = t.movieid
 WHERE yr = 1978
 ORDER BY casted DESC, title;
 

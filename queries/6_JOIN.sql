@@ -36,12 +36,12 @@ WHERE stadium = 'National Stadium, Warsaw';
 -- 8. Show the name of all players who scored a goal against Germany.
 SELECT DISTINCT player
 FROM game JOIN goal ON matchid = id
-WHERE (team1='GER'
-XOR team2='GER') AND teamid <> 'GER';
+WHERE (team1 = 'GER'
+XOR team2 = 'GER') AND teamid <> 'GER';
 
 -- 9. Show teamname and the total number of goals scored.
 SELECT teamname, COUNT(teamid)
-FROM eteam JOIN goal ON id=teamid
+FROM eteam JOIN goal ON id = teamid
 GROUP BY teamname;
 
 -- 10. Show the stadium and the number of goals scored in each stadium.
@@ -66,9 +66,9 @@ GROUP BY matchid, mdate;
 -- 13. List every match with the goals scored by each team as shown.
 SELECT mdate,
   team1,
-  SUM(CASE WHEN teamid=team1 THEN 1 ELSE 0 END) score1,
+  SUM(CASE WHEN teamid = team1 THEN 1 ELSE 0 END) score1,
   team2,
-  SUM(CASE WHEN teamid=team2 THEN 1 ELSE 0 END) score2
+  SUM(CASE WHEN teamid = team2 THEN 1 ELSE 0 END) score2
 FROM game LEFT JOIN goal ON matchid = id
 GROUP BY mdate, team1, team2
 ORDER BY mdate, matchid, team1, team2;

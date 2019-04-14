@@ -4,7 +4,7 @@ FROM world
 WHERE population >
 (SELECT population
 FROM world
-WHERE name='Russia');
+WHERE name = 'Russia');
 
 -- 2. Show the countries in Europe with a per capita GDP greater than 'United Kingdom'.
 SELECT name
@@ -12,7 +12,7 @@ FROM world
 WHERE continent = 'Europe' AND gdp/population >
 (SELECT gdp/population
   FROM world
-  WHERE name='United Kingdom');
+  WHERE name = 'United Kingdom');
 
 -- 3. List the name and continent of countries in the continents containing either Argentina or Australia. Order by name of the country.
 SELECT name, continent
@@ -29,11 +29,11 @@ FROM world
 WHERE population >
 (SELECT population
   FROM world
-  WHERE name='Canada') AND
+  WHERE name = 'Canada') AND
   population <
 (SELECT population
   FROM world
-  WHERE name='Poland');
+  WHERE name = 'Poland');
 
 -- 5. Show the name and the population of each country in Europe. Show the population as a percentage of the population of Germany.
 SELECT name, CONCAT(ROUND(population/(SELECT population
@@ -55,7 +55,7 @@ FROM world x
 WHERE area >= ALL
 (SELECT area
 FROM world y
-WHERE y.continent=x.continent
+WHERE y.continent = x.continent
   AND area > 0);
 
 -- 8. List each continent and the name of the country that comes first alphabetically.
